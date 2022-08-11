@@ -16,12 +16,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += main.cpp\
     MqttSignTool/aliyunmqttpasswordgenerator.cpp \
-    MqttSignTool/hash-library/crc32.cpp \
-    MqttSignTool/hash-library/keccak.cpp \
-    MqttSignTool/hash-library/md5.cpp \
-    MqttSignTool/hash-library/sha1.cpp \
-    MqttSignTool/hash-library/sha256.cpp \
-    MqttSignTool/hash-library/sha3.cpp \
     hash-library/crc32.cpp \
     hash-library/keccak.cpp \
     hash-library/md5.cpp \
@@ -33,14 +27,6 @@ SOURCES += main.cpp\
 
 HEADERS  += mainwindow.h \
     MqttSignTool/aliyunmqttpasswordgenerator.h \
-    MqttSignTool/hash-library/crc32.h \
-    MqttSignTool/hash-library/hash.h \
-    MqttSignTool/hash-library/hmac.h \
-    MqttSignTool/hash-library/keccak.h \
-    MqttSignTool/hash-library/md5.h \
-    MqttSignTool/hash-library/sha1.h \
-    MqttSignTool/hash-library/sha256.h \
-    MqttSignTool/hash-library/sha3.h \
     hash-library/crc32.h \
     hash-library/hash.h \
     hash-library/hmac.h \
