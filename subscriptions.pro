@@ -25,3 +25,6 @@ FORMS    += mainwindow.ui \
 
 target.path = $$[QT_INSTALL_EXAMPLES]/mqtt/subscriptions
 INSTALLS += target
+
+DISTFILES += \
+    password_generate.py

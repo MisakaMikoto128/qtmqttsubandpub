@@ -84,9 +84,6 @@ MainWindow::MainWindow(QWidget *parent) :
         ui->editLog->insertPlainText(content);
     });
 
-    /*
-        MQTT三元组，注意阿里云的话需要指定的ClientID
-    */
     QString hostname = ui->lineEditHost->text();
     QString username = ui->lineEditUser->text();
     QString password = ui->lineEditPassword->text();
