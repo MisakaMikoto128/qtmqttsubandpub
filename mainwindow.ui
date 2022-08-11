@@ -43,14 +43,14 @@
          <item row="4" column="0">
           <widget class="QLabel" name="label_9">
            <property name="text">
-            <string>Password:</string>
+            <string>deviceSecret</string>
            </property>
           </widget>
          </item>
          <item row="4" column="1">
-          <widget class="QLineEdit" name="lineEditPassword">
+          <widget class="QLineEdit" name="lineEditDeviceSecret">
            <property name="text">
-            <string>a897b65ffcc0be4dcc714a2adcd4e1c6c5ed63e0272505cdcb1a56091b1cfe99</string>
+            <string/>
            </property>
            <property name="echoMode">
             <enum>QLineEdit::Password</enum>
@@ -67,7 +67,7 @@
          <item row="0" column="1">
           <widget class="QLineEdit" name="lineEditHost">
            <property name="text">
-            <string>a1w78T9VVmM.iot-as-mqtt.cn-shanghai.aliyuncs.com</string>
+            <string>iot-as-mqtt.cn-shanghai.aliyuncs.com</string>
            </property>
           </widget>
          </item>
@@ -79,30 +79,30 @@
           </widget>
          </item>
          <item row="3" column="1">
-          <widget class="QLineEdit" name="lineEditUser">
+          <widget class="QLineEdit" name="lineEditDeviceName">
            <property name="text">
-            <string>dev1&amp;a1w78T9VVmM</string>
+            <string/>
            </property>
           </widget>
          </item>
          <item row="3" column="0">
           <widget class="QLabel" name="label_8">
            <property name="text">
-            <string>Username:</string>
+            <string>deviceName</string>
            </property>
           </widget>
          </item>
          <item row="2" column="1">
-          <widget class="QLineEdit" name="lineEditClientID">
+          <widget class="QLineEdit" name="lineEditProductKey">
            <property name="text">
-            <string>a1w78T9VVmM.dev1|securemode=2,signmethod=hmacsha256,timestamp=1660109794161|</string>
+            <string/>
            </property>
           </widget>
          </item>
          <item row="2" column="0">
           <widget class="QLabel" name="label_10">
            <property name="text">
-            <string>CliendID</string>
+            <string>productKey</string>
            </property>
           </widget>
          </item>

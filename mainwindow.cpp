@@ -56,6 +56,8 @@
 #include <QtMqtt/QMqttClient>
 #include <QtWidgets/QMessageBox>
 
+#include "MqttSignTool/aliyunmqttpasswordgenerator.h"
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -84,23 +86,29 @@ MainWindow::MainWindow(QWidget *parent) :
         ui->editLog->insertPlainText(content);
     });
 
-    QString hostname = ui->lineEditHost->text();
-    QString username = ui->lineEditUser->text();
-    QString password = ui->lineEditPassword->text();
-    QString clientid = ui->lineEditClientID->text();
-    int port = ui->spinBoxPort->value();
+    std::string host = ui->lineEditHost->text().toStdString();
+    std::string productKey = ui->lineEditProductKey->text().toStdString();
+    std::string deviceName = ui->lineEditDeviceName->text().toStdString();
+    std::string deviceSecret = ui->lineEditDeviceSecret->text().toStdString();
+    std::string SN = AliyunMqttPasswordGenerator::generateRandomString(10);
 
-    m_client->setPort(port);
+    AliyunMqttPasswordGenerator gen(host,productKey,deviceName,deviceSecret,SN);
+
+    QString hostname = QString::fromStdString(gen.hostName());
+    QString clientid = QString::fromStdString(gen.clientId());
+    QString username = QString::fromStdString(gen.userName());
+    QString password = QString::fromStdString(gen.password());
+
+
     m_client->setHostname(hostname);
     m_client->setUsername(username);
     m_client->setPassword(password);
     m_client->setClientId(clientid);
 
-    connect(ui->lineEditHost, &QLineEdit::textChanged, m_client, &QMqttClient::setHostname);
+    int port = ui->spinBoxPort->value();
+    m_client->setPort(port);
     connect(ui->spinBoxPort, QOverload<int>::of(&QSpinBox::valueChanged), this, &MainWindow::setClientPort);
-    connect(ui->lineEditUser, &QLineEdit::textChanged, m_client, &QMqttClient::setUsername);
-    connect(ui->lineEditPassword, &QLineEdit::textChanged, m_client, &QMqttClient::setPassword);
-    connect(ui->lineEditClientID, &QLineEdit::textChanged, m_client, &QMqttClient::setClientId);
+
     updateLogStateChange();
 }
 
@@ -115,16 +123,33 @@ void MainWindow::on_buttonConnect_clicked()
     if (m_client->state() == QMqttClient::Disconnected) {
         ui->lineEditHost->setEnabled(false);
         ui->spinBoxPort->setEnabled(false);
-        ui->lineEditUser->setEnabled(false);
-        ui->lineEditPassword->setEnabled(false);
+        ui->lineEditProductKey->setEnabled(false);
+        ui->lineEditDeviceName->setEnabled(false);
         ui->buttonConnect->setText(tr("Disconnect"));
+        std::string host = ui->lineEditHost->text().toStdString();
+        std::string productKey = ui->lineEditProductKey->text().toStdString();
+        std::string deviceName = ui->lineEditDeviceName->text().toStdString();
+        std::string deviceSecret = ui->lineEditDeviceSecret->text().toStdString();
+        std::string SN = AliyunMqttPasswordGenerator::generateRandomString(10);
 
+        AliyunMqttPasswordGenerator gen(host,productKey,deviceName,deviceSecret,SN);
+
+        QString hostname = QString::fromStdString(gen.hostName());
+        QString clientid = QString::fromStdString(gen.clientId());
+        QString username = QString::fromStdString(gen.userName());
+        QString password = QString::fromStdString(gen.password());
+
+
+        m_client->setHostname(hostname);
+        m_client->setUsername(username);
+        m_client->setPassword(password);
+        m_client->setClientId(clientid);
         m_client->connectToHost();
     } else {
         ui->lineEditHost->setEnabled(true);
         ui->spinBoxPort->setEnabled(true);
-        ui->lineEditUser->setEnabled(true);
-        ui->lineEditPassword->setEnabled(true);
+        ui->lineEditProductKey->setEnabled(true);
+        ui->lineEditDeviceName->setEnabled(true);
         ui->buttonConnect->setText(tr("Connect"));
 
         m_client->disconnectFromHost();
@@ -149,8 +174,8 @@ void MainWindow::brokerDisconnected()
 {
     ui->lineEditHost->setEnabled(true);
     ui->spinBoxPort->setEnabled(true);
-    ui->lineEditUser->setEnabled(true);
-    ui->lineEditPassword->setEnabled(true);
+    ui->lineEditProductKey->setEnabled(true);
+    ui->lineEditDeviceName->setEnabled(true);
     ui->buttonConnect->setText(tr("Connect"));
 }
 
