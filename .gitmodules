@@ -1,0 +1,3 @@
+[submodule "MqttSignTool"]
+	path = MqttSignTool
+	url = https://github.com/MisakaMikoto128/MqttSignTool
